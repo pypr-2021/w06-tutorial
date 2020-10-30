@@ -1,0 +1,71 @@
+###week06_ex1_start_py
+factors6 = [n**2+3 for n in range(50, 101) if (n**2 + 3)%6 == 0]
+print(factors6)
+###week06_ex1_end
+
+###week06_ex2_start_py
+combinations = [i + j + k for i in 'abc' for j in 'abc' for k in 'abc' if not i==j==k]
+print(combinations)
+###week06_ex2_end
+
+###week06_ex3_start_py
+grades = {'Alice': {'maths': 'A', 'english': 'C', 'music': 'B'},
+          'Bob': {'maths': 'C', 'english': 'A', 'history': 'A'},
+          'Charlie': {'physics': 'D', 'music': 'A', 'biology': 'A'}}
+
+# Change Alice's maths grade to B
+grades['Alice']['maths'] = 'B'
+
+# Add a C in English for Charlie
+grades['Charlie']['english'] = 'C'
+
+# Add grades for Dara
+grades['Dara'] = {'maths': 'B', 'history': 'D'}
+
+print(grades)
+###week06_ex3_switch_md
+For dictionaries, the same command can be used to change an existing item or to create a new key.
+
+Here, we have nested dictionaries: for instance, `grades['Alice']` should give us the *value* in the dictionary `grades` which corresponds to the *key* `'Alice'` --- and that value is *another dictionary*. This means that we can simply index it by key, just like any other dictionary --- for instance, the value corresponding to the key `'maths'` in the dictionary `grades['Alice']` is accessed with `grades['Alice']['maths']`.
+###week06_ex3_end
+
+###week06_ex4_start_py
+grades_by_subject = {}
+for student, all_grades in grades.items():
+    for subject, grade in all_grades.items():
+        if subject not in grades_by_subject:
+            # Subject key doesn't exist yet, create it and add the current student
+            grades_by_subject[subject] = {student: grade}
+        else:
+            # Subject exists, add a new entry to the (nested) value dict
+            grades_by_subject[subject][student] = grade
+
+print(grades_by_subject)
+###week06_ex4_end
+
+###week06_ex5_start_py
+# Define the function
+def seq_Perrin():
+    '''
+    Yields elements of the sequence of Perrin numbers.
+    '''
+    c = 3
+    yield c    # first stopping point
+    
+    b, c = c, 0
+    yield c    # second stopping point
+    
+    a, b, c = b, c, 2
+    yield c    # third stopping point
+    
+    while True:
+        a, b, c = b, c, a+b
+        yield c    # all the subsequent stopping points
+
+# Create the generator
+gen_Perrin = seq_Perrin()
+
+# Use the generator
+for i in range(16):
+    print(next(gen_Perrin))
+###week06_ex5_end
